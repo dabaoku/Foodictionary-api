@@ -26,7 +26,7 @@ class UsersController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
-            return response(['message' => $validator->errors()]);
+            return response(['message' => $validator->errors()],422);
         }
         
         // 預設值插入
@@ -46,13 +46,20 @@ class UsersController extends Controller
         $password = $request -> auth_password;
 
         $user = User::where('email',$email) -> first();
+        // 判斷登入email是否存在資料庫，在response的第二個參數可以回傳server status，default是200
         if(!$user){
-            return response(['message' => 'Login failed. Please check your email']);
-        
-    }
-        if(!Hash::check($password, $user -> password)){
-            return response(['message' => 'Login failed. Please check your password']);
+            return response(['message' => 'Login failed. Please check your email'],422);
         }
-        return response(['message' => 'Login successfully.' , 'api_token' => $user -> api_token]);
+        // 判斷密碼是否正確
+        if(!Hash::check($password, $user -> password)){
+            return response(['message' => 'Login failed. Please check your password'],422);
+        }
+
+        // 如果資料正確，回傳successful message
+        return response(['message' => 'Login successfully.' , 
+        'member_id' => $user -> member_id,
+        'member_name' => $user -> member_name,
+        'email' => $user -> email,
+        'api_token' => $user -> api_token]);
     }
 }
