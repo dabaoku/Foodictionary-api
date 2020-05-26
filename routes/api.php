@@ -30,6 +30,11 @@ Route::post('recipe', 'RecipeController@store');
 Route::get('recipe', 'RecipeController@index');
 Route::get('recipe/{id}', 'RecipeController@show');
 
+//Step
+Route::post('step', 'StepController@store');
+Route::get('step', 'StepController@index');
+Route::get('step/{recipe_id}', 'StepController@show');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

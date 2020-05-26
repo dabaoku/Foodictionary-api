@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Recipe;
+use App\Step;
 
-class RecipeController extends Controller
+class StepController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        // get all recipe
-        return response(['data' => Recipe::get()]);
+        // get all step
+        return response(['data' => Step::get()]);
     }
 
 
@@ -28,44 +28,43 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        // create new recipe
+        //create new step
         $rules = [
-            'recipe_name' => 'required|string|min:2|max:255',
-            'recipe_total_time' => 'int|required',
-            'recipe_description' => 'string|required|max:255',
-            'recipe_note' => 'string|required|max:255',
-            'recipe_video' => 'string|required|max:255',
+            'recipe_id' => 'required',
+            'step' => 'required|int|max:20',
+            'step_prescription' => 'string|required|max:255',
+            'step_time' => 'int|max:20',
         ];
 
         $validator = Validator::make($request->all(), $rules);
+
         if($validator->fails()){
             return response(['message' => $validator->errors()],422);
         }
 
-        $data = $request->only(['recipe_name', 'recipe_total_time', 'recipe_description','recipe_note','recipe_video']);
+        $data = $request->only(['recipe_id', 'step', 'step_prescription', 'step_time']);
         
-        $recipe = Recipe::create($data);
-        return response(['data' => $recipe]);
+        $step = Step::create($data);
+        return response(['data' => $step]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $recipe_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($recipe_id)
     {
-        // find one recipe
-        $recipe = Recipe::find($id);
+        // get one recipe all step
+        $step = Step::where('recipe_id',$recipe_id)->get();
 
-        if(!is_null($recipe)){
-            return response(['data' => $recipe]);
+        if(!is_null($step)){
+            return response(['data' => $step]);
         }
-
-        return response(['message' => 'Recipe not found'],422);
+        
+        return response(['message' => 'step not found'],422);
     }
-
 
     /**
      * Update the specified resource in storage.
