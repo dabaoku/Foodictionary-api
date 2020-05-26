@@ -17,14 +17,18 @@ use Illuminate\Support\Facades\Route;
 //User Route
 Route::post('register', 'UsersController@register');
 Route::post('login', 'UsersController@login');
-Route::get('users', 'UsersController@index');
-Route::get('users/{id}', 'UsersController@show');
-Route::put('users/{id}', 'UsersController@update');
-Route::delete('users/{id}', 'UsersController@destroy');
+// Route::get('users', 'UsersController@index');
+// Route::get('users/{id}', 'UsersController@show');
+// Route::put('users/{id}', 'UsersController@update');
+// Route::delete('users/{id}', 'UsersController@destroy');
 
 //Ingredient Route
 Route::get('ingredients', 'IngredientsController@index');
 
+//Recipe Route
+Route::post('recipe', 'RecipeController@store');
+Route::get('recipe', 'RecipeController@index');
+Route::get('recipe/{id}', 'RecipeController@show');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
