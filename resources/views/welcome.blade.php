@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    品均小雞雞 
                 </div>
 
                 <div class="links">
@@ -93,6 +93,10 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
+
+                <div>
+                    <img src="image/hongyi.jpg" width="500" height="333">
                 </div>
             </div>
         </div>

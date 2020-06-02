@@ -34,6 +34,11 @@ Route::get('allrecipe', 'RecipeController@allRecipe');
 //Step
 Route::post('step', 'StepController@store');
 
+//Recipe_ingredient
+Route::get('recipe_ingredient', 'Recipe_ingredientController@index');
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
