@@ -17,10 +17,7 @@ use Illuminate\Support\Facades\Route;
 //User Route
 Route::post('register', 'UsersController@register');
 Route::post('login', 'UsersController@login');
-// Route::get('users', 'UsersController@index');
-// Route::get('users/{id}', 'UsersController@show');
-// Route::put('users/{id}', 'UsersController@update');
-// Route::delete('users/{id}', 'UsersController@destroy');
+
 
 //Ingredient Route
 Route::get('ingredients', 'IngredientsController@index');
@@ -34,8 +31,13 @@ Route::get('allrecipe', 'RecipeController@allRecipe');
 //Step
 Route::post('step', 'StepController@store');
 
-//Recipe_ingredient
-Route::get('recipe_ingredient', 'Recipe_ingredientController@index');
+//Stock
+Route::get('stock/{id}', 'StocksController@show');
+Route::post('stock', 'StocksController@store');
+Route::delete('stock/{id}', 'StocksController@destroy');
+
+//Recipe_ingredient 應該用不到這個api
+// Route::get('recipe_ingredient', 'Recipe_ingredientController@index');
 
 
 

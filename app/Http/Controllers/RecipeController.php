@@ -115,7 +115,7 @@ class RecipeController extends Controller
         ->select('ingredients.ingredient_id',
         'ingredients.ingredient_name',
         'recipe_ingredients.ingredient_amount')
-        // ->where('recipe_ingredients.recipe_id',$id)
+        ->where('recipe_ingredients.recipe_id',$id)
         ->get();
 
 
