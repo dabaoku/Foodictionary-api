@@ -14,30 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 
-//User Route
+// User Route
 Route::post('register', 'UsersController@register');
 Route::post('login', 'UsersController@login');
 
 
-//Ingredient Route
+// Ingredient Route
 Route::get('ingredients', 'IngredientsController@index');
 
-//Recipe Route
+// Recipe Route
 Route::post('recipe', 'RecipeController@store');
 Route::get('recipe', 'RecipeController@index');
 Route::get('recipe/{id}', 'RecipeController@show');
 Route::get('allrecipe', 'RecipeController@allRecipe');
 
-//Step
+// Step
 Route::post('step', 'StepController@store');
 
-//Stock
+// Stock
 Route::get('stock/{id}', 'StocksController@show');
 Route::post('stock', 'StocksController@store');
 Route::delete('stock/{id}', 'StocksController@destroy');
 
-//Recipe_ingredient 應該用不到這個api
-// Route::get('recipe_ingredient', 'Recipe_ingredientController@index');
+// Category
+Route::get('category', 'CategorysController@index');
 
 
 
