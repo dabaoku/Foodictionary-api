@@ -36,6 +36,26 @@ class RecipeController extends Controller
         return response(['data' => $data]);
     }
 
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRecipeAndIngredient()
+    {
+        // get 所有的食譜及食材
+        $data = DB::table('ingredients')
+                ->join('recipe_ingredients','recipe_ingredients.ingredient_id','=','ingredients.ingredient_id')
+                ->join('recipes','recipes.id','=','recipe_ingredients.recipe_id')
+                ->select(
+                'ingredients.ingredient_name',
+                'ingredients.ingredient_id',
+                'recipes.recipe_name',
+                'recipes.id')
+                ->get();
+        return response(['data' => $data]);
+    }
+
 
     /**
      * Display a listing of the resource.

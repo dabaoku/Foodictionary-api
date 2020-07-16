@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 // User Route
 Route::post('register', 'UsersController@register');
 Route::post('login', 'UsersController@login');
+Route::delete('logout','UsersController@logout');
 
 
 // Ingredient Route
@@ -27,6 +28,7 @@ Route::post('recipe', 'RecipeController@store');
 Route::get('recipe', 'RecipeController@index');
 Route::get('recipe/{id}', 'RecipeController@show');
 Route::get('allrecipe', 'RecipeController@allRecipe');
+Route::get('allrecipeAndIngredient', 'RecipeController@getRecipeAndIngredient');
 
 // Step
 Route::post('step', 'StepController@store');

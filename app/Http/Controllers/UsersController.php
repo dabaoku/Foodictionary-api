@@ -46,6 +46,7 @@ class UsersController extends Controller
         $password = $request -> auth_password;
 
         $user = User::where('email',$email) -> first();
+        dd($user);
         // 判斷登入email是否存在資料庫，在response的第二個參數可以回傳server status，default是200
         if(!$user){
             return response(['message' => 'Login failed. Please check your email'],422);
@@ -61,5 +62,20 @@ class UsersController extends Controller
         'member_name' => $user -> member_name,
         'email' => $user -> email,
         'api_token' => $user -> api_token]);
+    }
+
+    public function logout(Request $request){
+        $email = $request -> auth_email;
+        $newtoken = Str::random(60);
+        $user = User::where('email',$email) ->  update(['api_token' => $newtoken]);
+        $userdata = User::where('email',$email) -> first();
+        if($user){
+            return response(['message' => 'Log out failed'],422);
+        }else{     
+            // return response(['message' => 'Log out successfully',
+            // 'api_token' => $userdata -> api_token ]);
+            return response(['message' => 'Log out successfully']);
+        }
+        
     }
 }
